@@ -1,3 +1,8 @@
+# Custom Python.gitignore file
+data/
+# allow only data/.placeholder
+data/.placeholder
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
