@@ -43,32 +43,36 @@ You can also access the dataset through [🤗 Hugging Face](https://huggingface.
 <span style="font-variant: small-caps;">LiteraryQA</span> is a filtered and improved version of [NarrativeQA](https://arxiv.org/abs/1712.07040). 
 Each book contains the following data:
 
-```json
+```python
 {
-    "document_id": "9562ea781e95c048df96f528a2a8272721cde3a7", # (str) i.e., NarrativeQA ID of the document 
-    "gutenberg_id": "32154", # (str) i.e., key of the book in Project Gutenberg
-    "split": "test", # (str) i.e., in which split the book is found
-    "title": "The Variable Man",
-    "text": "THE VARIABLE MAN\nBY PHILIP K. DICK\nILLUSTRATED BY EBEL\nHe fixed things—clocks, refrigerators, vidsen...",
-    "summary": "The Terran system is growing and expanding all the time. But an old and corrupt Centaurian Empire is...",
-    "qas": [
+    "document_id": "9562ea781e95c048df96f528a2a8272721cde3a7",  # (str) i.e., NarrativeQA ID of the document
+    "gutenberg_id": "32154",  # (str) i.e., key of the book in Project Gutenberg
+    "split": "test",  # (str) i.e., in which split the book is found
+    "title": "The Variable Man",  # (str) i.e., title of the book
+    "text": "THE VARIABLE MAN\nBY PHILIP K. DICK\nILLUSTRATED BY EBEL\nHe fixed things—clocks, refrigerators, vidsen...",  # (str) i.e., full text of the book
+    "summary": "The Terran system is growing and expanding all the time. But an old and corrupt Centaurian Empire is...",  # (str) i.e., summary of the book
+    "qas": [  # (list) i.e., list of question-answer pairs associated with the book
         {
-            "question": "Why is Terra at war with Proxima Centauri?",
+            "question": "Why is Terra at war with Proxima Centauri?",  # (str) i.e., question about the book
             "answers": [
                 "Because they will not give Terra the room to expand their empire.",
-                "The Centaurian Empire will not let humans from Terra grow out of their current empire."
-                ],
-            "is_question_modified": False,
-            "is_answer_modified": [False, False],
-        }, 
-        ...
-    ]
-    "metadata": {
-        "publication_date": "-",
-        "genre_tags": "novella;literary work;sci-fi;",
-        "text_urls": "http://www.gutenberg.org/ebooks/32154.txt.utf-8", 
-        "summary_urls": "http://en.wikipedia.org/wiki/The_Variable_Man"
-    }
+                "The Centaurian Empire will not let humans from Terra grow out of their current empire.",
+            ],  # (list) i.e., list of reference answers to the question
+            "is_question_modified": False,  # (bool) i.e., whether the question was modified by an LLM or a human annotator
+            "is_answer_modified": [
+                False,
+                False,
+            ],  # (list) i.e., whether each of the reference answers was modified by an LLM or a human annotator
+        },
+        ...,
+    ],
+    "metadata": {  # (dict) i.e., additional metadata about the book
+        "author": "Philip K. Dick",  # (str) i.e., author of the book
+        "publication_date": "-",  # (str) i.e., publication date of the book
+        "genre_tags": "novella;literary work;sci-fi;",  # (str) i.e., genre tags associated with the book
+        "text_urls": "http://www.gutenberg.org/ebooks/32154.txt.utf-8",  # (str) i.e., original URL to the full text of the book
+        "summary_urls": "http://en.wikipedia.org/wiki/The_Variable_Man",  # (str) i.e., original URL to the summary of the book
+    },
 }
 ```
 
