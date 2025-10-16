@@ -1,7 +1,4 @@
-<div align="center">
-  <img src="assets/literaryqa.png" width="250">
-
-</div>
+<div align="center"><img src="assets/literaryqa.png" width="250"></div>
 
 <div align="center">
 
@@ -94,7 +91,7 @@ This work has been published at EMNLP 2025 (main conference). If you use any art
     url = "",
     pages = "",
     ISBN = "",
-    }
+}
 ```
 
 

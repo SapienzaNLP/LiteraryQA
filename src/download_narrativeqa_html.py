@@ -73,7 +73,7 @@ class ScriptArgs(Tap):
         Ensures that ``output_dir`` exists before use.
         """
         os.makedirs(self.output_dir, exist_ok=True)
-        self.splits = self.splits.split("-")
+        self.data_splits = self.splits.split("-")
         loguru_setup(level="INFO")
 
 
@@ -296,7 +296,7 @@ def main(args: ScriptArgs):
         args: Parsed command-line arguments of type ``ScriptArgs``.
     """
     nqa_df = download_narrativeqa_raw_files(
-        args.nqa_hf_path, args.splits, args.output_dir
+        args.nqa_hf_path, args.data_splits, args.output_dir
     )
     log.info(f"NarrativeQA -- Failed download: {len(nqa_df)} books.")
     print(f"\nNarrativeQA DataFrame - .head():\n{nqa_df.head()}")
