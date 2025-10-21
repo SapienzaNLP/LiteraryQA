@@ -6,6 +6,7 @@
 
 [![Conference](http://img.shields.io/badge/EMNLP-2025-4b44ce.svg)](https://2025.aclweb.org/)
 [![Paper](http://img.shields.io/badge/paper-ACL--anthology-B31B1B.svg)]()
+[![arXiv](https://img.shields.io/badge/arXiv-paper-b31b1b.svg)](https://arxiv.org/abs/2510.13494) 
 [![Hugging Face Dataset](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Dataset-FCD21D)](https://huggingface.co/datasets/sapienzanlp/LiteraryQA)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC%20BY--NC%204.0-green.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
 </div>
@@ -26,7 +27,7 @@ uv sync
 
 ## <span style="font-variant: small-caps;">LiteraryQA</span> Data
 
-### Local Download
+### Download the data
 To obtain the <span style="font-variant: small-caps;">LiteraryQA</span> dataset, first download the original books from [Project Gutenberg](https://www.gutenberg.org/ebooks/), then run the cleaning step:
 ```bash
 ./scripts/download_books.sh test # dash-separated list of the data splits
@@ -34,11 +35,11 @@ To obtain the <span style="font-variant: small-caps;">LiteraryQA</span> dataset,
 ```
 The dataset will be saved to the default directory `data/`.
 
-You can also access the dataset through [🤗 Hugging Face](https://huggingface.co/datasets/sapienzanlp/LiteraryQA).
+You can also access the dataset through [🤗 Hugging Face](https://huggingface.co/datasets/sapienzanlp/LiteraryQA), which will do the same operations in background.
 
 ### Data format
 <span style="font-variant: small-caps;">LiteraryQA</span> is a filtered and improved version of [NarrativeQA](https://arxiv.org/abs/1712.07040). 
-Each book contains the following data:
+Here is a sample of the dataset:
 
 ```python
 {
@@ -76,21 +77,16 @@ Each book contains the following data:
 ## Citation
 This work has been published at EMNLP 2025 (main conference). If you use any artifact, please cite our paper as follows:
 
+[![arXiv](https://img.shields.io/badge/arXiv-paper-b31b1b.svg)](https://arxiv.org/abs/2510.13494) 
 ```bibtex
-@inproceedings{bonomo-etal-2025-literaryqa,
-    title = "LiteraryQA: Towards Effective Evaluation of Long-document Narrative QA",
-    author = "Bonomo, Tommaso  and
-      Gioffré, Luca  and
-      Navigli, Roberto",
-    editor = "",
-    booktitle = "Proceedings of the ...",
-    month = "11",
-    year = "2025",
-    address = "Suzhou, China",
-    publisher = "Empirical Methods for Natural Language Processing",
-    url = "",
-    pages = "",
-    ISBN = "",
+@misc{bonomo2025literaryqaeffectiveevaluationlongdocument,
+      title={{LiteraryQA}: Towards Effective Evaluation of Long-document Narrative QA}, 
+      author={Tommaso Bonomo and Luca Gioffré and Roberto Navigli},
+      year={2025},
+      eprint={2510.13494},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      url={https://arxiv.org/abs/2510.13494}, 
 }
 ```
 
