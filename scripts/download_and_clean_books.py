@@ -7,18 +7,18 @@ It also cleans the downloaded HTML files to produce normalized text files suitab
 from csv import DictReader, DictWriter
 from pathlib import Path
 
-from literaryqa.clean import clean_and_save, detect_encoding_and_read, extract_raw_text
-from literaryqa.download import download_htm_from_gutenberg
 from loguru import logger
 from tap import Tap
 from tqdm import tqdm
+
+from literaryqa.clean import clean_and_save, detect_encoding_and_read, extract_raw_text
+from literaryqa.download import download_htm_from_gutenberg
 
 
 class ScriptArgs(Tap):
     """Command-line arguments for the downloader script."""
 
     output_dir: Path = Path("data/literaryqa")  # Directory to save downloaded books
-    normalize: bool = False  # normalizes punkt for easy comparison, can be disabled
 
     def process_args(self) -> None:
         """Ensure the output directory exists and setup logging."""
@@ -98,7 +98,7 @@ def main(args: ScriptArgs) -> None:
             clean_and_save(
                 gt_id=book_id,
                 raw_text=extract_raw_text(html),
-                normalize=args.normalize,
+                normalize=True,
                 output_file=output_txt_path,
                 log_file=log_file_path,
             )
