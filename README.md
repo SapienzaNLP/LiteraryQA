@@ -11,11 +11,21 @@
 
 
 ##  Description
-This repository contains the official code for the EMNLP 2025 main conference paper: [<span style="font-variant: small-caps;">LiteraryQA</span>: Towards Effective Evaluation of Long-document Narrative QA](https://arxiv.org/abs/2510.13494) by [Tommaso Bonomo](https://www.linkedin.com/in/tommaso-bonomo/)\*, [Luca Gioffré](https://www.linkedin.com/in/luca-gioffre/)\* and [Roberto Navigli](https://www.linkedin.com/in/robertonavigli/).
+This repository contains the official code for the EMNLP 2025 main conference paper: [LiteraryQA: Towards Effective Evaluation of Long-document Narrative QA](https://arxiv.org/abs/2510.13494) by [Tommaso Bonomo](https://www.linkedin.com/in/tommaso-bonomo/)\*, [Luca Gioffré](https://www.linkedin.com/in/luca-gioffre/)\* and [Roberto Navigli](https://www.linkedin.com/in/robertonavigli/).
 The dataset is available at this [🤗 Hugging Face dataset](https://huggingface.co/datasets/sapienzanlp/LiteraryQA).
 If you rather download the data manually, or if you want to run evaluations on your own models' predictions, please follow the instructions below.
 
 ## Local download
+
+### ⚠️ Project Gutenberg license disclaimer
+
+LiteraryQA is based on books from Project Gutenberg, which are publicly available under the [Project Gutenberg License](https://www.gutenberg.org/policy/license.html).
+This license holds for users located in the United States, where the books are in the public domain.
+
+We do not distribute the original text of the books, rather our dataset consists of a script that downloads and preprocesses the books from Project Gutenberg.
+Users are responsible for checking the copyright status of each book in their country.
+
+### Setup and download
 
 Clone the repository:
 ```bash
