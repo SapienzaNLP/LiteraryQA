@@ -76,7 +76,24 @@ Here is a sample of the dataset:
 
 ## Evaluation
 
-TODO
+To run the evaluation of your model's predictions, you must have a file in JSONL format containing the predictions and the reference answers.
+The schema of each entry must be:
+```python
+{
+    "prediction": "your model's answer here",  # (str) i.e., your model's predicted answer to the question
+    "answers": [  # (list) i.e., list of reference answers to the question
+        "first reference answer here",
+        "second reference answer here",
+    ],
+}
+```
+We provide the predictions of the systems tested in the paper in the `data/predictions/` folder for your reference.
+
+To run the evaluation, use the following command:
+```bash
+uv run scripts/evaluate_predictions.py --predictions_file <path_to_your_predictions_file>
+```
+
 
 ## Citation
 This work has been published at EMNLP 2025 (main conference). If you use any artifact, please cite our paper as follows:

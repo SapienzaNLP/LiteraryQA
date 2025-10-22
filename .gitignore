@@ -4,6 +4,7 @@
 # Custom Python.gitignore file
 data/
 !data/literaryqa_urls.tsv
+!data/predictions/*.jsonl
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
