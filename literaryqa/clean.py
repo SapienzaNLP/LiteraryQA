@@ -51,6 +51,8 @@ GUTENBERG_PRODUCTION_PATTERNS = [
     r"^produced by.*(David Widger|Greg Weeks|Melissa Er-Raqabi|the PG Online|John Bickers|Dagny|Robert Cicconetti|David Garcia|Al Haines|Judith Boss|An Anonymous Volunteer|Distributed|Martin Pettit|Judy Boss|Nick Hodson of London|England|Eve Sobol|Les Bowler|John Hamm|David Reed|Martin Adamson\.|Malcolm Farmer|).*",
     r"^text file produced by.*(\nproofreaders team.*)?",
     r"^html file produced by david widger",
+    r"^produced from scanned images.*$",
+    r"^from the Google Print project.*$",
 ]
 
 GUTENBERG_PREFACE_PATTERNS = [
