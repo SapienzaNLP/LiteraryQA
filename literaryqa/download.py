@@ -79,7 +79,7 @@ def detect_encoding_and_read(file_path: Path) -> str:
     return text
 
 
-def download_htm_from_gutenberg(book_id: str, save_dir: Path, split: str, pbar: tqdm | None = None):
+def download_htm_from_gutenberg(book_id: str, split: str, save_dir: Path, log_dir: Path, pbar: tqdm | None = None):
     """Download a Gutenberg HTML file for a given book ID, with mirror fallback.
 
     The function first checks a cached copy under ``save_dir/split/{book_id}.htm``.
@@ -98,7 +98,7 @@ def download_htm_from_gutenberg(book_id: str, save_dir: Path, split: str, pbar: 
         The decoded HTML text if successfully retrieved and read; otherwise
         ``None``.
     """
-    log_file = save_dir / "logs" / "failed_downloads.log"
+    log_file = log_dir / split / "downloads.log"
     log_file.parent.mkdir(parents=True, exist_ok=True)
 
     text = None
@@ -138,10 +138,5 @@ def download_htm_from_gutenberg(book_id: str, save_dir: Path, split: str, pbar: 
                 f.write(f"{book_id}\tFAILED\tAll mirrors failed\n")
             else:
                 f.write(f"{book_id}\tSUCCESS\t{url}\n")
-
-        if not text:
-            logger.error(f"Failed to download {book_id}")
-            with open(log_file, "a") as f:
-                f.write(f"{book_id}\tFAILED\tAll mirrors failed\n")
 
     return text
