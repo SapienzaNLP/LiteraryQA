@@ -11,9 +11,12 @@
 
 
 ##  📖 Description
-This repository contains the official code for the EMNLP 2025 main conference paper: [LiteraryQA: Towards Effective Evaluation of Long-document Narrative QA](https://arxiv.org/abs/2510.13494) by [Tommaso Bonomo](https://www.linkedin.com/in/tommaso-bonomo/)\*, [Luca Gioffré](https://www.linkedin.com/in/luca-gioffre/)\* and [Roberto Navigli](https://www.linkedin.com/in/robertonavigli/).
+LiteraryQA is a long-context question-answering benchmark focusing on literary works.
+We derived this dataset from [NarrativeQA](https://arxiv.org/abs/1712.07040), addressing issues with the raw text of books, with the crowdsourced QAs, and with the metrics employed to evaluate systems on this kind of benchmarks.
 
-The dataset is available at this [🤗 Hugging Face dataset](https://huggingface.co/datasets/sapienzanlp/LiteraryQA).
+For further details, please refer to our EMNLP 2025 main conference paper: [LiteraryQA: Towards Effective Evaluation of Long-document Narrative QA](https://arxiv.org/abs/2510.13494) by [Tommaso Bonomo](https://www.linkedin.com/in/tommaso-bonomo/)\*, [Luca Gioffré](https://www.linkedin.com/in/luca-gioffre/)\* and [Roberto Navigli](https://www.linkedin.com/in/robertonavigli/).
+
+This dataset is available on [🤗 Hugging Face](https://huggingface.co/datasets/sapienzanlp/LiteraryQA).
 If you rather download the data manually, or if you want to run evaluations on your own models' predictions, please follow the instructions below.
 
 ## ⚠️ Project Gutenberg License Disclaimer
@@ -68,59 +71,85 @@ python scripts/download_and_clean_books.py --output_dir data/literaryqa
 </details>
 
 ### 📋 Data format
-LiteraryQA is a filtered and improved version of [NarrativeQA](https://arxiv.org/abs/1712.07040). 
-Here is a sample of the dataset:
+The dataset is organized with the following schema:
+* **`document_id`** *(str)* — Unique NarrativeQA identifier for the document.
+* **`gutenberg_id`** *(str)* — Project Gutenberg key identifying the book.
+* **`split`** *(str)* — Dataset partition where the book belongs (e.g., `"train"`, `"validation"`, `"test"`).
+* **`title`** *(str)* — Title of the book.
+* **`text`** *(str)* — Full text of the book from Project Gutenberg.
+* **`summary`** *(str)* — Human-written or Wikipedia-derived summary of the book.
+* **`qas`** *(list[dict])* — List of question–answer pairs related to the book. Each element contains:
 
-```python
+  * **`question`** *(str)* — A question about the book.
+  * **`answers`** *(list of str)* — One or more reference answers.
+  * **`is_question_modified`** *(bool)* — Whether the question comes from the original NarrativeQA dataset (`False`) or was edited (`True`)
+  * **`is_answer_modified`** *(list of bool)* — For each answer, whether it comes from the original NarrativeQA dataset (`False`) or was edited (`True`)
+* **`metadata`** *(dict)* — Additional contextual information about the book, including:
+
+  * **`author`** *(str)* — Name of the book’s author.
+  * **`publication_date`** *(str)* — Publication date (or “-” if unknown).
+  * **`genre_tags`** *(str)* — Semicolon-separated list of genres or literary classifications.
+  * **`text_urls`** *(str)* — URL to the original full text source.
+  * **`summary_urls`** *(str)* — URL to the source of the summary.
+
+
+Here is an example of an entry of the dataset:
+```json
 {
-    "document_id": "9562ea781e95c048df96f528a2a8272721cde3a7",  # (str) i.e., NarrativeQA ID of the document
-    "gutenberg_id": "32154",  # (str) i.e., key of the book in Project Gutenberg
-    "split": "test",  # (str) i.e., in which split the book is found
-    "title": "The Variable Man",  # (str) i.e., title of the book
-    "text": "THE VARIABLE MAN\nBY PHILIP K. DICK\nILLUSTRATED BY EBEL\nHe fixed things—clocks, refrigerators, vidsen...",  # (str) i.e., full text of the book
-    "summary": "The Terran system is growing and expanding all the time. But an old and corrupt Centaurian Empire is...",  # (str) i.e., summary of the book
-    "qas": [  # (list) i.e., list of question-answer pairs associated with the book
-        {
-            "question": "Why is Terra at war with Proxima Centauri?",  # (str) i.e., question about the book
-            "answers": [
-                "Because they will not give Terra the room to expand their empire.",
-                "The Centaurian Empire will not let humans from Terra grow out of their current empire.",
-            ],  # (list) i.e., list of reference answers to the question
-            "is_question_modified": False,  # (bool) i.e., whether the question was modified by an LLM or a human annotator
-            "is_answer_modified": [
-                False,
-                False,
-            ],  # (list) i.e., whether each of the reference answers was modified by an LLM or a human annotator
-        },
-        ...,
-    ],
-    "metadata": {  # (dict) i.e., additional metadata about the book
-        "author": "Philip K. Dick",  # (str) i.e., author of the book
-        "publication_date": "-",  # (str) i.e., publication date of the book
-        "genre_tags": "novella;literary work;sci-fi;",  # (str) i.e., genre tags associated with the book
-        "text_urls": "http://www.gutenberg.org/ebooks/32154.txt.utf-8",  # (str) i.e., original URL to the full text of the book
-        "summary_urls": "http://en.wikipedia.org/wiki/The_Variable_Man",  # (str) i.e., original URL to the summary of the book
-    },
+  "document_id": "9562ea781e95c048df96f528a2a8272721cde3a7",
+  "gutenberg_id": "32154",
+  "split": "test",
+  "title": "The Variable Man",
+  "text": "THE VARIABLE MAN\nBY PHILIP K. DICK\nILLUSTRATED BY EBEL\nHe fixed things—clocks, refrigerators, vidsen...",
+  "summary": "The Terran system is growing and expanding all the time. But an old and corrupt Centaurian Empire is...",
+  "qas": [
+    {
+      "question": "Why is Terra at war with Proxima Centauri?",
+      "answers": [
+        "Because they will not give Terra the room to expand their empire.",
+        "The Centaurian Empire will not let humans from Terra grow out of their current empire."
+      ],
+      "is_question_modified": false,
+      "is_answer_modified": [false, false]
+    }
+  ],
+  "metadata": {
+    "author": "Philip K. Dick",
+    "publication_date": "1950",
+    "genre_tags": "novella;literary work;sci-fi;",
+    "text_urls": "http://www.gutenberg.org/ebooks/32154.txt.utf-8",
+    "summary_urls": "http://en.wikipedia.org/wiki/The_Variable_Man"
+  }
 }
 ```
+
 
 ## 📊 Evaluation
 
 To run the evaluation of your model's predictions, you must have a file in JSONL format containing the predictions and the reference answers.
-The simplest schema for each entry must be:
-```python
+Each row in the JSONL file must be a JSON object that conforms to the following schema:
+* **`prediction`** *(str)* — The model’s predicted answer to the question.
+* **`answers`** *(list of str)* — List of ground-truth (reference) answers for evaluation.
+* **`question`** *(str, optional)* — The original question posed to the model; used for context or evaluation by an LLM judge.
+* **`title`** *(str, optional)* — Title of the book associated with the question; provides additional context.
+* **`summary`** *(str, optional)* — Summary of the book; used in summary-based evaluation settings.
+
+Here is an example (*formatted for clarity*) of a row of the JSONL file:
+```json
 {
-    "prediction": "your model's answer here",  # (str) i.e., your model's predicted answer to the question
-    "answers": [  # (list) i.e., list of reference answers to the question
-        "first reference answer here",
-        "second reference answer here",
+  "prediction": "Terra is hemmed in by the Centauran Empire, cutting it off from other systems.",
+  "answers": [
+    "Because they will not give Terra the room to expand their empire.",
+    "The Centaurian Empire will not let humans from Terra grow out of their current empire."
     ],
-    # Optional fields if using LLM-as-a-Judge:
-    "question": "the question",  # (str) i.e., the question asked to the model,
-    "title": "the title of the book",  # (str) i.e., the title of the book, to provide context to the LLM judge
-    "summary": "the summary of the book",  # (str) i.e., the summary of the book, used in the summary-based evaluation
+  "question": "Why is Terra at war with Proxima Centauri?",
+  "title": "The Variable Man",
+  "summary": "The Terran system is growing and expanding all the time. But an old and corrupt Centaurian Empire is..."
 }
 ```
+
+
+
 We provide the predictions of the systems tested in the paper in the `data/predictions/` folder for your reference.
 
 To run the evaluation, first update the environment to use the necessary packages:
@@ -145,6 +174,26 @@ uv run scripts/evaluate_predictions.py --predictions_file <path_to_your_predicti
 
 ## 📝 Citation
 This work has been published at EMNLP 2025 (main conference). If you use any artifact, please cite our paper as follows:
+
+```bibtex
+@inproceedings{bonomo-etal-2025-literaryqa,
+    title = "{LiteraryQA: Towards Effective Evaluation of Long-Document Narrative QA}",
+    author = "Bonomo, Tommaso  and
+      Gioffr{\'e}, Luca  and
+      Navigli, Roberto",
+    editor = "",
+    booktitle = "Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+    month = nov,
+    year = "2025",
+    address = "Suzhou, China",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2025.emnlp-main.xxx",
+    doi = "",
+    pages = "xxx--xxx",
+    abstract = "Question Answering (QA) on narrative text poses a unique challenge to current systems, requiring a deep understanding of long, complex documents. However, the reliability of NarrativeQA, the most widely used benchmark in this domain, is hindered by noisy documents and flawed QA pairs. In this work, we introduce LiteraryQA, a high-quality subset of NarrativeQA focused on literary works. Using a human- and LLM-validated pipeline, we identify and correct low-quality QA samples while removing extraneous text from source documents. We then carry out a meta-evaluation of automatic metrics to clarify how systems should be evaluated on LiteraryQA. This analysis reveals that all n-gram-based metrics have a low system-level correlation to human judgment, while LLM-as-a-Judge evaluations, even with small open-weight models, can strongly agree with the ranking identified by humans. Finally, we benchmark a set of long-context LLMs on LiteraryQA. We release our code and data at https://github.com/SapienzaNLP/LiteraryQA."
+}
+
+```
 
 ```bibtex
 @misc{bonomo2025literaryqa,
