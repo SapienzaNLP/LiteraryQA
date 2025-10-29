@@ -195,18 +195,6 @@ This work has been published at EMNLP 2025 (main conference). If you use any art
 
 ```
 
-```bibtex
-@misc{bonomo2025literaryqa,
-      title={{LiteraryQA: Towards Effective Evaluation of Long-document Narrative QA}}, 
-      author={Tommaso Bonomo and Luca Gioffré and Roberto Navigli},
-      year={2025},
-      eprint={2510.13494},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL},
-      url={https://arxiv.org/abs/2510.13494}, 
-}
-```
-
 
 ## 📄 License
 
