@@ -190,9 +190,9 @@ This work has been published at EMNLP 2025 (main conference). If you use any art
     address = "Suzhou, China",
     publisher = "Association for Computational Linguistics",
     url = "https://aclanthology.org/2025.emnlp-main.1729/",
+    doi = "10.18653/v1/2025.emnlp-main.1729",
     pages = "34074--34095",
-    ISBN = "979-8-89176-332-6",
-    abstract = "Question Answering (QA) on narrative text poses a unique challenge to current systems, requiring a deep understanding of long, complex documents. However, the reliability of NarrativeQA, the most widely used benchmark in this domain, is hindered by noisy documents and flawed QA pairs. In this work, we introduce LiteraryQA, a high-quality subset of NarrativeQA focused on literary works. Using a human- and LLM-validated pipeline, we identify and correct low-quality QA samples while removing extraneous text from source documents. We then carry out a meta-evaluation of automatic metrics to clarify how systems should be evaluated on LiteraryQA.This analysis reveals that all n-gram-based metrics have a low system-level correlation to human judgment, while LLM-as-a-Judge evaluations, even with small open-weight models, can strongly agree with the ranking identified by humans.Finally, we benchmark a set of long-context LLMs on LiteraryQA. We release our code and data at https://github.com/sapienzaNLP/LiteraryQA."
+    ISBN = "979-8-89176-332-6"
 }
 ```
 
